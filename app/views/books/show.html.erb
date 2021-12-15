@@ -17,16 +17,17 @@
         <% end %>
       </ul>
 
-      <div class="feature-image">
-      
-      <%= image_tag(@book.image_url(:default)) %>
-      </div>
+   
 
       <div class="content pa4 mt3 bg-white border-radius-3">
 
       <h3 class="subtitle is-4">Description</h3>
-      <%= @book.description %>
-
+     <table class="table is-narrow">
+    <tr>
+     <td class="feature-image" width="200" height="400"><%= image_tag(@book.image_url(:thumb)) %></td>
+     <td><%= @book.description %></td>
+     </table>
+     
 
       <h3 class="subtitle is-4 pt5">Book Specs</h3>
 
@@ -54,19 +55,21 @@
           <td class="has-text-weight-bold">Author:</td>
           <td><%= @book.author %></td>
         </tr>
-      </table>
+        <tr>
+          <td class="has-text-weight-bold">Price:</td>
+          <td><%= number_to_currency(@book.price) %></td>
+        </tr>
+        <tr>
+          <td class="has-text-weight-bold">Sold by:</td>
+          <td><%= @book.user.name %></td>
+        </tr>
+        </table>
     </div>
     </div>
-    <div class="column is-3 is-offset-1">
-      <div class="bg-white pa4 border-radius-3">
-        <h4 class="title is-5 has-text-centered"><%= number_to_currency(@book.price) %></h4>
-        <p class="has-text-centered mb4">Sold by <%= @book.user.name %></p>
-      
-      </div>
-    </div>
+  
   </div>
 
- 
+
     <%= link_to 'Edit', edit_book_path(@book), class: 'button' %>
 
 </section>

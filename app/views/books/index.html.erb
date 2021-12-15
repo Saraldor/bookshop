@@ -3,7 +3,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="titel">
-          Browse the latest Books
+          Browse the latest Books in BookShop
         </h1>
       </div>
     </div>
@@ -33,7 +33,7 @@
         <p class="f3 fw6 has-text-right pt2 price"><%= number_to_currency(book.price) %></p>
   
      
-           <%= button_to 'Edit', edit_book_path(book), class: "button is-small" %>
+        <%= link_to 'Edit', edit_book_path(book), class: 'button' %>
            <%= button_to 'Delete', book, method: :delete, data: { confirm: "Are you sure ?" }, class: "button is-small" %>
         
   
