@@ -1,39 +1,71 @@
-<p id="notice"><%= notice %></p>
+<% content_for :body_class, 'bg-light' %>
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
+<section class="section instrument-show">
+  <div class="columns">
+    <div class="column is-8">
+      <h1 class="title is-2"><%= @book.titel %></h1>
 
-<p>
-  <strong>Category:</strong>
-  <%= @book.category %>
-</p>
+      <ul class="pv1">
+        <% if @book.category? %>
+        <li class="inline-block pr3"><%= @book.category %></li>
+        <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
+        <li class="inline-block pr3"><%= @book.author %></li>
 
-<p>
-  <strong>Condition:</strong>
-  <%= @book.condition %>
-</p>
+        <% if @book.condition? %>
+        <li class="inline-block pr3"><%= @book.condition %></li>
+        <% end %>
+      </ul>
 
-<p>
-  <strong>Typ:</strong>
-  <%= @book.typ %>
-</p>
+      <div class="feature-image">
+      
+      </div>
 
-<p>
-  <strong>Titel:</strong>
-  <%= @book.titel %>
-</p>
+      <div class="content pa4 mt3 bg-white border-radius-3">
 
-<p>
-  <strong>Price:</strong>
-  <%= @book.price %>
-</p>
+      <h3 class="subtitle is-4">Description</h3>
+      <%= @book.description %>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+
+      <h3 class="subtitle is-4 pt5">Book Specs</h3>
+
+      <table class="table is-narrow">
+        <% if @book.condition %>
+        <tr>
+          <td class="has-text-weight-bold">Condition:</td>
+          <td><%= @book.condition %></td>
+        </tr>
+        <% end %>
+        <% if @book.typ %>
+          <tr>
+            <td class="has-text-weight-bold">Type:</td>
+            <td><%= @book.typ %></td>
+          </tr>
+        <% end %>
+        <% if @book.category %>
+          <tr>
+            <td class="has-text-weight-bold">Category:</td>
+            <td><%= @book.category %></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td class="has-text-weight-bold">Author:</td>
+          <td><%= @book.author %></td>
+        </tr>
+      </table>
+    </div>
+    </div>
+    <div class="column is-3 is-offset-1">
+      <div class="bg-white pa4 border-radius-3">
+        <h4 class="title is-5 has-text-centered"><%= number_to_currency(@book.price) %></h4>
+        <p class="has-text-centered mb4">Sold by <%= @book.user.name %></p>
+      
+      </div>
+    </div>
+  </div>
+
+ 
+    <%= link_to 'Edit', edit_book_path(@book), class: 'button' %>
+
+</section>
