@@ -24,7 +24,7 @@
       <h3 class="subtitle is-4">Description</h3>
      <table class="table is-narrow">
     <tr>
-     <td class="feature-image" width="200" height="400"><%= image_tag(@book.image_url(:thumb)) %></td>
+     <td width="250" height="450"><%= image_tag(@book.image_url(:default)) %></td>
      <td><%= @book.description %></td>
      </table>
      
@@ -74,6 +74,6 @@
   </div>
 
   <% if book_author(@book) %>
-    <%= link_to 'Edit', edit_book_path(@book), class: 'button' %>
+    <%= link_to 'Edit', edit_book_path(@book), class: 'button is-small' %>
 <% end %>
 </section>

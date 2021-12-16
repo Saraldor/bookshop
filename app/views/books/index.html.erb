@@ -34,8 +34,7 @@
       
        
         <% if book_author(book) %>
-      <%= link_to 'Edit', edit_book_path(book), class: 'button' %>
-           <%= button_to 'Delete', book, method: :delete, data: { confirm: "Are you sure ?" }, class: "button is-small" %>
+      <%= link_to 'Edit', edit_book_path(book), class: "button is-small" %> <%= button_to 'Delete', book, method: :delete, data: { confirm: "Are you sure ?" }, class: "button is-small" %>
         <% end %>
   
       </div>

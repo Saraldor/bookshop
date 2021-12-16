@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
-    mount_uploader :image, ImageUploader
+  has_many :line_items 
+  mount_uploader :image, ImageUploader
     serialize :image, JSON 
     belongs_to :user, optional: true
 
