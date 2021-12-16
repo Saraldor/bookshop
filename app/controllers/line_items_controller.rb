@@ -2,7 +2,7 @@ class LineItemsController < ApplicationController
 include CurrentCart
 
   before_action :set_line_item, only: %i[ show edit update destroy ]
-before_action :set_cart, only [:create]
+  before_action :set_cart, only: [:create]
   # GET /line_items or /line_items.json
   def index
     @line_items = LineItem.all
@@ -24,11 +24,11 @@ before_action :set_cart, only [:create]
   # POST /line_items or /line_items.json
   def create
     book = Book.find(params[:book_id])
-    @line_item = @cart.add_book(line_item_params)
+    @line_item = @cart.add_book(book)
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item, notice: "Item added to cart." }
+        format.html { redirect_to @line_item.cart, notice: "Item added to cart." }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,9 +52,10 @@ before_action :set_cart, only [:create]
 
   # DELETE /line_items/1 or /line_items/1.json
   def destroy
+    @cart = Cart.find(session[:cart_id])
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: "Line item was successfully destroyed." }
+      format.html { redirect_to cart_path(@cart), notice: "Line item was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -67,6 +68,6 @@ before_action :set_cart, only [:create]
 
     # Only allow a list of trusted parameters through.
     def line_item_params
-      params.require(:line_item).permit(:book_id, :cart_id)
+      params.require(:line_item).permit(:book_id)
     end
 end
